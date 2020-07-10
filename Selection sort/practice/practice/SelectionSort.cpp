@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <clocale>
+#include "Header.h"
 // ‘ункци€ сортировки пр€мым выбором
 
 void print(int* num, int size) {
@@ -83,9 +84,10 @@ int main()
     int choose;
     int a[10];
     while (true) {
-
+        system("cls");
+        mainmenu();
         scanf("%d", &choose);
-
+        system("cls");
         if (choose == 1) {
             // ќбъ€вл€ем массив из 10 элементов
            // ¬водим значени€ элементов массива
@@ -94,27 +96,35 @@ int main()
                 printf("a[%d] = ", i);
                 scanf("%d", &a[i]);
             }
-            selectionSort(a, 10);  // вызываем функцию сортировк
             system("pause");
             continue;
         }
 
         if (choose == 2) {
-            Savefile(a);
-            continue;
-        }
-        if (choose == 3) {
-            load(a);
+            selectionSort(a, 10);
+            system("pause");
             continue;
         }
 
-        if (choose == 4)
+        if (choose == 3) {
+            Savefile(a);
+            system("pause");
+            continue;
+        }
+        if (choose == 4) {
+            load(a);
+            system("pause");
+            continue;
+        }
+
+        if (choose == 5)
         {
             print(a, 10);
+            system("pause");
             continue;
         }
 
-        if (choose == 5) {
+        if (choose == 6) {
             break;
         }
 
