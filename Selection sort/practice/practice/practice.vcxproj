@@ -139,8 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Load.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="Print.cpp" />
+    <ClCompile Include="Save.cpp" />
     <ClCompile Include="SelectionSort.cpp" />
+    <ClCompile Include="Sort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
