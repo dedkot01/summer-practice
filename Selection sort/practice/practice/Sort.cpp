@@ -1,4 +1,3 @@
-
 void selectionSort(int* num, int size)
 {
     int min, temp; // для поиска минимального элемента и для обмена

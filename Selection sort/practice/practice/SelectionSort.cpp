@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <clocale>
+#include <malloc.h>
 #include "Header.h"
 // Функция сортировки прямым выбором
 
@@ -10,44 +11,51 @@ int main()
 {
     setlocale(LC_ALL, "Rus");
     int choose;
-    int a[10];
+    int* a = nullptr; //указатель на массив
+    int n;
+    int v; // переменная, запоминающая, выделилась ли память для массива
     while (true) {
         system("cls");
         mainmenu();
         scanf("%d", &choose);
         system("cls");
         if (choose == 1) {
-            // Объявляем массив из 10 элементов
-           // Вводим значения элементов массива
-            for (int i = 0; i < 10; i++)
-            {
-                printf("a[%d] = ", i);
-                scanf("%d", &a[i]);
-            }
-            system("pause");
+                system("cls");
+                printf("Введите размер массива: ");
+                scanf("%d", &n);
+                // Выделение памяти
+                v = 1;
+                a = (int*)malloc(n * sizeof(int));
+                // Ввод элементов массива
+                for (int i = 0; i < n; i++)
+                {
+                    printf("a[%d] = ", i);
+                    scanf("%d", &a[i]);
+                }
+
             continue;
         }
 
         if (choose == 2) {
-            selectionSort(a, 10);
+            selectionSort(a, n);
             system("pause");
             continue;
         }
 
         if (choose == 3) {
-            Savefile(a);
+            Savefile(a, n);
             system("pause");
             continue;
         }
         if (choose == 4) {
-            load(a);
+            load(a, n);
             system("pause");
             continue;
         }
 
         if (choose == 5)
         {
-            print(a, 10);
+            print(a, n);
             system("pause");
             continue;
         }
@@ -56,6 +64,11 @@ int main()
             break;
         }
 
+    }
+
+
+    if (v==1) {
+        free(a);
     }
     return 0;
 }

@@ -5,7 +5,7 @@
 #include <clocale>
 #include "Header.h"
 
-void load(int* num)					//загрузка БД из файла
+void load(int* num, int size)					//загрузка БД из файла
 {
     system("cls");
     char Filename[25];
@@ -15,7 +15,7 @@ void load(int* num)					//загрузка БД из файла
     if (FILE* r = fopen(Filename, "r+b"))
     {
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < size; i++)
         {
             fscanf(r, "%d\n", &num[i]);
         }
