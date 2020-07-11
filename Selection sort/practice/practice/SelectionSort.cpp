@@ -12,8 +12,8 @@ int main()
     setlocale(LC_ALL, "Rus");
     int choose;
     int* a = nullptr; //указатель на массив
-    int n;
-    int v; // переменная, запоминающая, выделилась ли память для массива
+    int n = 0;
+    int v =0; // переменная, запоминающая, выделилась ли память для массива
     while (true) {
         system("cls");
         mainmenu();
@@ -48,7 +48,13 @@ int main()
             continue;
         }
         if (choose == 4) {
-            load(a, n);
+            system("cls");
+            char Filename[25];
+            printf("Для загрузки базы данных из файла введите имя файла с разрешением .txt: ");
+            scanf("%s", &Filename);
+            char* p = Filename;
+            a = load(p);
+            n = loadsize(p);
             system("pause");
             continue;
         }

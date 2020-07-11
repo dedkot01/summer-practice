@@ -5,27 +5,58 @@
 #include <clocale>
 #include "Header.h"
 
-void load(int* num, int size)					//загрузка БД из файла
+int *load(char *p)					//загрузка массива из файла
 {
-    system("cls");
+    int* a = nullptr;
+    int size;
     char Filename[25];
-    printf("Для загрузки базы данных из файла введите имя файла с разрешением .txt: ");
-    scanf("%s", &Filename);
-
+    int v = 0;
+    for (int i = 0; i < 25; i++) {
+        Filename[i] = p[i];
+    }
     if (FILE* r = fopen(Filename, "r+b"))
     {
-
+        fscanf(r, "%d\n", &size);
+        v = 1;
+        a = (int*)malloc(size * sizeof(int));
         for (int i = 0; i < size; i++)
         {
-            fscanf(r, "%d\n", &num[i]);
+            fscanf(r, "%d\n", &a[i]);
         }
 
         fclose(r);
 
     }
+ 
     else
     {
         printf("Данного файла не существует\n");
+        return 0;
+    }
+
+    return a;
+}
+
+
+
+
+int loadsize(char *p){
+    char Filename[25];
+    int size;
+    for (int i = 0; i < 25; i++) {
+        Filename[i] = p[i];
+    }
+    if (FILE* r = fopen(Filename, "r+b"))
+    {
+        fscanf(r, "%d\n", &size);
+        fclose(r);
 
     }
+
+    else
+    {
+        printf("Данного файла не существует\n");
+        return 0;
+    }
+    return size;
 }

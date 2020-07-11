@@ -18,6 +18,8 @@ void Savefile(int* num, int size) {
     printf("Пожалуйста введите имя файла с разрешением .txt: ");
     scanf("%s", &FileName);
     FILE* f = fopen(FileName, "w");
+    fprintf(f, "%d\n", size);
+    
     for (int i = 0; i < size; i++)
     {
         fprintf(f, "%d\n", num[i]);
