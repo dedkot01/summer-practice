@@ -27,12 +27,26 @@ int main()
                 v = 1;
                 a = (int*)malloc(n * sizeof(int));
                 // Ввод элементов массива
-                for (int i = 0; i < n; i++)
-                {
-                    printf("a[%d] = ", i);
-                    scanf("%d", &a[i]);
-                }
+                system("cls");
+                printf("Как вы хотите заполнить массив?\n 1. Вручную\n 2. Автоматически случайными числами от 1 до 100\nВведите число: ");
+                scanf("%d", &choose);
 
+                if (choose == 1) {
+                    for (int i = 0; i < n; i++)
+                    {
+                        printf("a[%d] = ", i);
+                        scanf("%d", &a[i]);
+                    }
+                }
+                if (choose == 2) {
+                    for (int i = 0; i < n; i++)
+                    {
+                        printf("a[%d] = ", i);
+                        a[i] = rand() % 100;
+                        printf("%d\n", a[i]);
+                    }
+                }
+                system("pause");
             continue;
         }
 
