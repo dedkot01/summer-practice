@@ -1,3 +1,4 @@
+#include <stdio.h>
 void selectionSort(int* num, int size)
 {
     int min, temp; // для поиска минимального элемента и для обмена
@@ -14,4 +15,5 @@ void selectionSort(int* num, int size)
         num[i] = num[min];
         num[min] = temp;
     }
+    printf("Массив отсортирован\n");
 }
