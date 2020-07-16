@@ -13,6 +13,8 @@ namespace WindowsFormsApp11
 {
     public partial class Form1 : Form
     {
+        int lo = 0 ;
+        string textt = "";
         public void fout(string str, string text)
         {
             try
@@ -38,7 +40,7 @@ namespace WindowsFormsApp11
             int c = 100, k = rand.Next() % c;
             int[] arr = new int[c];
             string text = " ", temp;
-            listBox1.Items.Add("№ значение массива");
+            lo = c;
             for (int i = 0; i < c; i++)
             {
                 arr[i] = k + (rand.Next() % c);// заполняем случайными числами ячейки
@@ -54,6 +56,20 @@ namespace WindowsFormsApp11
             fout("Сортировка.txt", text);
         }
 
+        public void add()
+        {
+            if (lo < 100)
+            {
+                string temp;
+                temp = Convert.ToString(lo) + " ";
+                textt += Convert.ToString(textBox2.Text) + " ";
+                lo++;
+                listBox1.Items.Add(temp + Convert.ToString(textBox2.Text));
+            }
+            else
+                label3.Text = "Достигнут максимум элементов";
+        }
+
         public void sort1()
         {
             string text = "", num = "", result = "";
@@ -63,8 +79,8 @@ namespace WindowsFormsApp11
                 text = f.ReadLine();
             }
             f.Close();
-            int j = 1, c = 100, flag = 0;
-            for (int i = 0; i < c; i++)
+            int j = 1, flag = 0;
+            for (int i = 0; i < lo; i++)
             {
                 num = "";
                 while (text[j] != ' ')
@@ -97,9 +113,9 @@ namespace WindowsFormsApp11
                 text = f.ReadLine();
             }
             f.Close();
-            int j = 1, c = 100;
-            int[] arr = new int[c];
-            for (int i = 0; i < c; i++)
+            int j = 1;
+            int[] arr = new int[lo];
+            for (int i = 0; i < lo; i++)
             {
                 num = "";
                 while (text[j] != ' ')
@@ -109,9 +125,27 @@ namespace WindowsFormsApp11
                 }
                 j++;
                 arr[i] = Convert.ToInt32(num);
-
             }
-            int l = 0, r = c, mid;
+            int tmp = 0, lenD = lo;
+            for (int i = 0; i < lenD; i++)
+            {
+                for (int y = (lenD - 1); y >= (i + 1); y--)
+                {
+                    if (arr[y] < arr[y - 1])
+                    {
+                        tmp = arr[y];
+                        arr[y] = arr[y - 1];
+                        arr[y - 1] = tmp;
+                    }
+                }
+            }
+            listBox1.Items.Clear();
+            listBox1.Items.Add("№ значение массива");
+            for (int i = 0; i < lo; i++)
+            {
+                listBox1.Items.Add(i + " " + arr[i]);
+            }
+            int l = 0, r = lo, mid;
             while (l < r)
             {
                 mid = (l + r) / 2;
@@ -136,7 +170,7 @@ namespace WindowsFormsApp11
         public Form1()
         {
             InitializeComponent();
-            generation();
+            listBox1.Items.Add("№ значение массива");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -148,6 +182,33 @@ namespace WindowsFormsApp11
         {
 
             sort2();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            generation();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            add();
+            textBox2.Text = "";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            listBox1.Items.Add("№ значение массива");
+            lo = 0;
+            StreamWriter sw = new StreamWriter("Сортировка.txt", false);
+            sw.Close();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            StreamWriter sw = new StreamWriter("Сортировка.txt", true);
+            sw.WriteLine(textt);
+            sw.Close();
         }
     }
 }
