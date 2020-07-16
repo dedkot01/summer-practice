@@ -13,8 +13,8 @@ namespace WindowsFormsApp11
 {
     public partial class Form1 : Form
     {
-        int lo = 0 ;
-        string textt = "";
+        int lo = 0;
+        string textt = " ";
         public void fout(string str, string text)
         {
             try
@@ -36,8 +36,9 @@ namespace WindowsFormsApp11
         public void generation()
         {
             listBox1.Items.Clear();
+            listBox1.Items.Add("№ значение массива");
             Random rand = new Random();
-            int c = 100, k = rand.Next() % c;
+            int c = 1000, k = rand.Next() % c;
             int[] arr = new int[c];
             string text = " ", temp;
             lo = c;
@@ -141,31 +142,39 @@ namespace WindowsFormsApp11
             }
             listBox1.Items.Clear();
             listBox1.Items.Add("№ значение массива");
-            for (int i = 0; i < lo; i++)
-            {
-                listBox1.Items.Add(i + " " + arr[i]);
-            }
-            int l = 0, r = lo, mid;
-            while (l < r)
-            {
-                mid = (l + r) / 2;
-                if (arr[mid] > Convert.ToInt32(textBox1.Text))
-                    r = mid;
-                else l = mid + 1;
-            }
-            r--;
-            if (arr[r] == Convert.ToInt32(textBox1.Text))
-            {
-                result += "Ключ " + textBox1.Text + " находится в ячейке " + r + "\n";
-            }
-            else
+                for (int i = 0; i < lo; i++)
+                {
+                    listBox1.Items.Add(i + " " + arr[i]);
+                }
+            if (Convert.ToInt32(textBox1.Text) < arr[0])
             {
                 result = "Мы не нашли ключ " + textBox1.Text + " в массиве";
             }
-            label3.Text = result;
+            else
+            {
+                int l = 0, r = lo, mid;
+                while (l < r)
+                {
+                    mid = (l + r) / 2;
+                    if (arr[mid] > Convert.ToInt32(textBox1.Text))
+                        r = mid;
+                    else l = mid + 1;
+                }
+                r--;
+
+                if (arr[r] == Convert.ToInt32(textBox1.Text))
+                {
+                    result += "Ключ " + textBox1.Text + " находится в ячейке " + r + "\n";
+                }
+                else
+                {
+                    result = "Мы не нашли ключ " + textBox1.Text + " в массиве";
+                }
+            }
+               label3.Text = result;
             StreamWriter sw = new StreamWriter(@"Результат.txt");
-            sw.WriteLine(result);
-            sw.Close();
+           sw.WriteLine(result);
+           sw.Close();
         }
         public Form1()
         {
@@ -202,6 +211,7 @@ namespace WindowsFormsApp11
             lo = 0;
             StreamWriter sw = new StreamWriter("Сортировка.txt", false);
             sw.Close();
+            textt = " ";
         }
 
         private void button6_Click(object sender, EventArgs e)
